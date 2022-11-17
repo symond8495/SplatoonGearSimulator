@@ -11,6 +11,14 @@ public abstract class Weapon {
         this.SubWeaponName = SubWeaponName;
     }
 
+    protected void setWeaponTag(String tagName) {
+        this.weaponTag = tagName;
+    }
+
+    public String getWeaponTag() {
+        return this.weaponTag;
+    }
+
     public String getMainWeaponName() {
         return this.MainWeaponName;
     }

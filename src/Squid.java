@@ -1,8 +1,12 @@
 import gear.*;
 import weapon.*;
 
+// 一つしかインスタンスを作れない
+// 二つ以上生成しようとすると例外処理が発生して強制終了する。
+// デザインパターン:Singleton
 public class Squid {
-    // ブキ、アタマ、フク、クツ
+    private static Squid squid;
+
     String name;
     int hp;
     int squidSpeed;
@@ -15,12 +19,29 @@ public class Squid {
 
     Weapon weapon;
 
-    public Squid(String name) {
+    private Squid(String name) {
         this.name = name;
         hp = 100;
         squidSpeed = 10;
         runSpeed = 6;
         inkVolume = 100;
+
+        squid = null;
+    }
+
+    // Squidを取得する唯一の方法
+    public static Squid getSquid(String name) {
+        try {
+            if (squid == null) {
+                squid = new Squid(name);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println("\"Squid\"クラスのインスタンスは一つしか生成出来ません。");
+            System.exit(0);
+        }
+        return squid;
     }
 
     public void setWeapon(String MainWeaponName, String SubWeaponName) {
