@@ -21,16 +21,16 @@ public class Squid {
 
     private Squid(String name) {
         this.name = name;
-        hp = 100;
-        squidSpeed = 10;
-        runSpeed = 6;
-        inkVolume = 100;
+        this.hp = 100;
+        this.squidSpeed = 10;
+        this.runSpeed = 6;
+        this.inkVolume = 100;
 
         squid = null;
     }
 
     // Squidを取得する唯一の方法
-    public static Squid getSquid(String name) {
+    public static Squid getSquidInstance(String name) {
         try {
             if (squid == null) {
                 squid = new Squid(name);
@@ -44,9 +44,10 @@ public class Squid {
         return squid;
     }
 
-    public void setWeapon(String MainWeaponName) {
-        weapon = new Brush(MainWeaponName);
-        // weapon = new Shooter(MainWeaponName);
+    public void setWeapon(String MainWeaponName, String MainWeaponType) {
+        WeaponContext context = new WeaponContext(MainWeaponName);
+        context.stateChangeWeapon(MainWeaponName, MainWeaponType);
+        this.weapon = context.getWeaponInstance();
     }
 
     public void setGear(String headName, String clothiongName, String shoeName) {
@@ -59,14 +60,14 @@ public class Squid {
         System.out.printf("【名前】%s\n", this.name);
         System.out.printf(
                 "【ギア】\nアタマ : %s\nフク : %s\nクツ : %s\n",
-                head.getName(),
-                clothiong.getName(),
-                shoe.getName());
+                this.head.getName(),
+                this.clothiong.getName(),
+                this.shoe.getName());
         System.out.printf(
                 "【ブキ】\nブキ : %s\nボム : %s\n射程 : %s\nブキ重量 : %s",
-                weapon.getMainWeaponName(),
-                weapon.getSubWeaponName(),
-                weapon.getRange(),
-                weapon.getHeavyWeight());
+                this.weapon.getMainWeaponName(),
+                this.weapon.getSubWeaponName(),
+                this.weapon.getRange(),
+                this.weapon.getHeavyWeight());
     }
 }

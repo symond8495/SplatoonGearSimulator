@@ -3,6 +3,7 @@ package weapon;
 import com.fasterxml.jackson.databind.JsonNode;
 
 // TODO: ブキによってイカ速が変わる
+// ブキを生成できるのは一つだけ
 public abstract class Weapon {
     protected JsonNode weaponNode;
 

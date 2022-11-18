@@ -2,8 +2,6 @@ package weapon;
 
 import java.io.File;
 import java.io.IOException;
-// import java.util.List;
-// import java.util.HashMap;
 
 // Jsonを読む為の外部ライブラリ
 import com.fasterxml.jackson.databind.JsonNode;

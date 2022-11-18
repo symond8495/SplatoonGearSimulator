@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        Squid symond = Squid.getSquid("\nしもんど\n");
+        Squid symond = Squid.getSquidInstance("\nしもんど\n");
 
         // 複数のインスタンスを生成しようとするとエラー吐いて強制終了する。
         // Squid hoge = Squid.getSquid("hogehoge");
@@ -10,7 +10,7 @@ public class Main {
                 "アナアキスクエアグラス",
                 "スミチラシベスト",
                 "01STER コハク");
-        symond.setWeapon("パブロ");
+        symond.setWeapon(".52ガロン", "シューター");
         symond.display();
     }
 }
