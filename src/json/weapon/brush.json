@@ -1,0 +1,22 @@
+{
+    "パブロ": {
+        "Range": 14,
+        "PaintRange": 23,
+        "SubWeaponName": "スプラッシュボム",
+        "Special": "メガホンレーザー5.1ch",
+        "SpecialPoint": 180,
+        "KillTime": 0.383,
+        "DPS": 257,
+        "HeavyWeight": "軽量"
+    },
+    "パブロ・ヒュー": {
+        "Range": 14,
+        "PaintRange": 23,
+        "SubWeaponName": "トラップ",
+        "Special": "グレートバリア",
+        "SpecialPoint": 180,
+        "KillTime": 0.267,
+        "DPS": 336,
+        "HeavyWeight": "軽量"
+    }
+}

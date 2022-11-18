@@ -10,9 +10,7 @@ public class Main {
                 "アナアキスクエアグラス",
                 "スミチラシベスト",
                 "01STER コハク");
-        symond.setWeapon(
-                "パブロ",
-                "スプラッシュボム");
+        symond.setWeapon("パブロ");
         symond.display();
     }
 }

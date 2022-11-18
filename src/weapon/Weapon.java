@@ -1,29 +1,78 @@
 package weapon;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 // TODO: ブキによってイカ速が変わる
 public abstract class Weapon {
-    private String MainWeaponName;
-    private String SubWeaponName;
-    private String weaponTag;
+    protected JsonNode weaponNode;
 
-    public Weapon(String MainWeaponName, String SubWeaponName) {
-        this.MainWeaponName = MainWeaponName;
-        this.SubWeaponName = SubWeaponName;
+    protected String mainWeaponName;
+    protected String weaponTag;
+    protected int range;
+    protected int paintRange;
+    protected String subWeaponName;
+    protected String special;
+    protected int specialPoint;
+    protected float killTime;
+    protected float dps;
+    protected String heavyWeight;
+
+    public Weapon(String MainWeaponName) {
+        this.mainWeaponName = MainWeaponName;
+        this.readWeaponInfo();
+        this.setWeaponInfo();
     }
 
-    protected void setWeaponTag(String tagName) {
-        this.weaponTag = tagName;
+    abstract protected void setWeaponInfo();
+
+    abstract protected void readWeaponInfo();
+
+    /*
+     *
+     * get
+     *
+     */
+    protected String getNodeValue(String Key) {
+        return this.weaponNode.get(Key).asText();
+    }
+
+    public String getMainWeaponName() {
+        return this.mainWeaponName;
     }
 
     public String getWeaponTag() {
         return this.weaponTag;
     }
 
-    public String getMainWeaponName() {
-        return this.MainWeaponName;
+    public int getRange() {
+        return this.range;
+    }
+
+    public int getPaintRange() {
+        return this.paintRange;
     }
 
     public String getSubWeaponName() {
-        return this.SubWeaponName;
+        return this.subWeaponName;
+    }
+
+    public String getSpecial() {
+        return this.special;
+    }
+
+    public int getSpecialPoint() {
+        return this.specialPoint;
+    }
+
+    public float getKillTime() {
+        return this.killTime;
+    }
+
+    public float getDPS() {
+        return this.dps;
+    }
+
+    public String getHeavyWeight() {
+        return this.heavyWeight;
     }
 }

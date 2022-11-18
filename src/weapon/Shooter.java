@@ -1,16 +1,16 @@
 package weapon;
 
+import java.io.File;
 import java.io.IOException;
 // import java.util.List;
 // import java.util.HashMap;
-import java.nio.file.Paths;
 
 // Jsonを読む為の外部ライブラリ
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Brush extends Weapon {
-    public Brush(String MainWeaponName) {
+public class Shooter extends Weapon {
+    public Shooter(String MainWeaponName) {
         super(MainWeaponName);
     }
 
@@ -18,7 +18,7 @@ public class Brush extends Weapon {
     protected void setWeaponInfo() {
         readWeaponInfo();
 
-        this.weaponTag = "フデ";
+        this.weaponTag = "シューター";
         this.range = Integer.valueOf(getNodeValue("Range"));
         this.paintRange = Integer.valueOf(getNodeValue("PaintRange"));
         this.subWeaponName = getNodeValue("SubWeaponName");
@@ -35,9 +35,7 @@ public class Brush extends Weapon {
         // 初期化しないとreturn出来ない
         ObjectMapper mapper = new ObjectMapper();
         try {
-            // JsonNode node = mapper.readTree(new File("src\\json\\weapon\\brush.json"));
-            JsonNode node = mapper.readTree(Paths.get("src\\json\\weapon\\brush.json").toFile());
-            // System.out.println(node);
+            JsonNode node = mapper.readTree(new File("src\\json\\weapon\\shooter.json"));
             this.weaponNode = node.get(getMainWeaponName());
 
             // 値が適切でない

@@ -1,0 +1,32 @@
+{
+    "わかばシューター": {
+        "Range": 22,
+        "PaintRange": 22,
+        "SubWeaponName": "スプラッシュボム",
+        "Special": "グレートバリア",
+        "SpecialPoint": 180,
+        "KillTime": 0.267,
+        "DPS": 336,
+        "HeavyWeight": "軽量"
+    },
+    ".52ガロン": {
+        "Range": 26,
+        "PaintRange": 26,
+        "SubWeaponName": "スプラッシュシールド",
+        "Special": "メガホンレーザー5.1ch",
+        "SpecialPoint": 200,
+        "KillTime": 0.167,
+        "DPS": 346,
+        "HeavyWeight": "中量"
+    },
+    "シャープマーカー": {
+        "Range": 24,
+        "PaintRange": 22,
+        "SubWeaponName": "クイックボム",
+        "Special": "カニタンク",
+        "SpecialPoint": 200,
+        "KillTime": 0.267,
+        "DPS": 336,
+        "HeavyWeight": "軽量"
+    }
+}

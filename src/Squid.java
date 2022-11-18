@@ -44,8 +44,9 @@ public class Squid {
         return squid;
     }
 
-    public void setWeapon(String MainWeaponName, String SubWeaponName) {
-        weapon = new Brush(MainWeaponName, SubWeaponName);
+    public void setWeapon(String MainWeaponName) {
+        weapon = new Brush(MainWeaponName);
+        // weapon = new Shooter(MainWeaponName);
     }
 
     public void setGear(String headName, String clothiongName, String shoeName) {
@@ -62,8 +63,10 @@ public class Squid {
                 clothiong.getName(),
                 shoe.getName());
         System.out.printf(
-                "【ブキ】\nブキ : %s\nボム : %s\n",
+                "【ブキ】\nブキ : %s\nボム : %s\n射程 : %s\nブキ重量 : %s",
                 weapon.getMainWeaponName(),
-                weapon.getSubWeaponName());
+                weapon.getSubWeaponName(),
+                weapon.getRange(),
+                weapon.getHeavyWeight());
     }
 }
