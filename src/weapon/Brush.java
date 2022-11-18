@@ -1,9 +1,7 @@
 package weapon;
 
 import java.io.IOException;
-// import java.util.List;
-// import java.util.HashMap;
-import java.nio.file.Paths;
+import java.io.File;
 
 // Jsonを読む為の外部ライブラリ
 import com.fasterxml.jackson.databind.JsonNode;
@@ -18,15 +16,20 @@ public class Brush extends Weapon {
     protected void setWeaponInfo() {
         readWeaponInfo();
 
-        this.weaponTag = "フデ";
-        this.range = Integer.valueOf(getNodeValue("Range"));
-        this.paintRange = Integer.valueOf(getNodeValue("PaintRange"));
-        this.subWeaponName = getNodeValue("SubWeaponName");
-        this.special = getNodeValue("Special");
-        this.specialPoint = Integer.valueOf(getNodeValue("SpecialPoint"));
-        this.killTime = Float.valueOf(getNodeValue("KillTime"));
-        this.dps = Float.valueOf(getNodeValue("DPS"));
-        this.heavyWeight = getNodeValue("HeavyWeight");
+        try {
+            this.weaponTag = "フデ";
+            this.range = Integer.valueOf(getNodeValue("Range"));
+            this.paintRange = Integer.valueOf(getNodeValue("PaintRange"));
+            this.subWeaponName = getNodeValue("SubWeaponName");
+            this.special = getNodeValue("Special");
+            this.specialPoint = Integer.valueOf(getNodeValue("SpecialPoint"));
+            this.killTime = Float.valueOf(getNodeValue("KillTime"));
+            this.dps = Float.valueOf(getNodeValue("DPS"));
+            this.heavyWeight = getNodeValue("HeavyWeight");
+        } catch (NullPointerException e) {
+            System.out.printf("\"%s\"は存在しません。\n", this.mainWeaponName);
+            System.exit(0);
+        }
     }
 
     // Jsonファイルを読み込む
@@ -35,9 +38,7 @@ public class Brush extends Weapon {
         // 初期化しないとreturn出来ない
         ObjectMapper mapper = new ObjectMapper();
         try {
-            // JsonNode node = mapper.readTree(new File("src\\json\\weapon\\brush.json"));
-            JsonNode node = mapper.readTree(Paths.get("src\\json\\weapon\\brush.json").toFile());
-            // System.out.println(node);
+            JsonNode node = mapper.readTree(new File("src\\json\\weapon\\brush.json"));
             this.weaponNode = node.get(getMainWeaponName());
 
             // 値が適切でない

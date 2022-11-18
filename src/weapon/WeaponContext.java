@@ -18,7 +18,8 @@ public class WeaponContext {
                 setWeaponState(new Shooter(MainWeaponName));
                 break;
             default: // 0が返る場合。状態変更無し。
-                break;
+                System.out.printf("\"%s\"は存在しません。\n", MainWeaponType);
+                System.exit(0);
         }
     }
 

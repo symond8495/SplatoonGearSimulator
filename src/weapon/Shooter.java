@@ -1,7 +1,7 @@
 package weapon;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.File;
 
 // Jsonを読む為の外部ライブラリ
 import com.fasterxml.jackson.databind.JsonNode;
@@ -16,15 +16,20 @@ public class Shooter extends Weapon {
     protected void setWeaponInfo() {
         readWeaponInfo();
 
-        this.weaponTag = "シューター";
-        this.range = Integer.valueOf(getNodeValue("Range"));
-        this.paintRange = Integer.valueOf(getNodeValue("PaintRange"));
-        this.subWeaponName = getNodeValue("SubWeaponName");
-        this.special = getNodeValue("Special");
-        this.specialPoint = Integer.valueOf(getNodeValue("SpecialPoint"));
-        this.killTime = Float.valueOf(getNodeValue("KillTime"));
-        this.dps = Float.valueOf(getNodeValue("DPS"));
-        this.heavyWeight = getNodeValue("HeavyWeight");
+        try {
+            this.weaponTag = "シューター";
+            this.range = Integer.valueOf(getNodeValue("Range"));
+            this.paintRange = Integer.valueOf(getNodeValue("PaintRange"));
+            this.subWeaponName = getNodeValue("SubWeaponName");
+            this.special = getNodeValue("Special");
+            this.specialPoint = Integer.valueOf(getNodeValue("SpecialPoint"));
+            this.killTime = Float.valueOf(getNodeValue("KillTime"));
+            this.dps = Float.valueOf(getNodeValue("DPS"));
+            this.heavyWeight = getNodeValue("HeavyWeight");
+        } catch (NullPointerException e) {
+            System.out.printf("\"%s\"は存在しません。\n", this.mainWeaponName);
+            System.exit(0);
+        }
     }
 
     // Jsonファイルを読み込む
