@@ -54,20 +54,34 @@ public class Squid {
         head = new Head(headName);
         clothiong = new Clothiong(clothiongName);
         shoe = new Shoe(shoeName);
+
+        head.display();
+        clothiong.display();
+        shoe.display();
     }
 
     public void display() {
         System.out.printf("【名前】%s\n", this.name);
+        System.out.println("【ギア】");
+
+        this.gearDisplay(this.head);
+        this.gearDisplay(this.clothiong);
+        this.gearDisplay(this.shoe);
         System.out.printf(
-                "【ギア】\nアタマ : %s\nフク : %s\nクツ : %s\n",
-                this.head.getName(),
-                this.clothiong.getName(),
-                this.shoe.getName());
-        System.out.printf(
-                "【ブキ】\nブキ : %s\nボム : %s\n射程 : %s\nブキ重量 : %s",
+                "【ブキ】\nブキ : %s\nボム : %s\n射程 : %s\nブキ重量 : %s\n",
                 this.weapon.getMainWeaponName(),
                 this.weapon.getSubWeaponName(),
                 this.weapon.getRange(),
                 this.weapon.getHeavyWeight());
+    }
+
+    private void gearDisplay(Gear gear) {
+        System.out.printf("%s : %s\nメインギア : %s\nサブギア : [%s, %s, %s]\n\n",
+                gear.getGearType(),
+                gear.getGearName(),
+                gear.getMainGearSlot(),
+                gear.getSubGearSlot1(),
+                gear.getSubGearSlot2(),
+                gear.getSubGearSlot3());
     }
 }
