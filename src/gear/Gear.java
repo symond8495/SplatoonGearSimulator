@@ -1,5 +1,7 @@
 package gear;
 
+import gearSlot.*;
+
 import java.io.IOException;
 import java.io.File;
 import java.util.Map;
@@ -9,8 +11,7 @@ import java.util.HashMap;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import gearSlot.*;
-
+// TODO: ギアパワーの数を集計する。
 public abstract class Gear {
     protected JsonNode gearNode;
 
@@ -26,15 +27,19 @@ public abstract class Gear {
 
     public Gear(String gearName) {
         this.gearName = gearName;
+
         this.setGearType();
 
+        // Json読み込み
         this.readGearInfo();
 
+        // ギア生成
         this.mainGearSlot = new MainGearSlot("MainGear", this.gearNode);
         this.subGearSlot1 = new SubGearSlot("SubGear1", this.gearNode);
         this.subGearSlot2 = new SubGearSlot("SubGear2", this.gearNode);
         this.subGearSlot3 = new SubGearSlot("SubGear3", this.gearNode);
 
+        // ギアパワーセット
         this.mainGearSlot.setGear(this.gearNode, this.mainGearSlot.getSlotPosition());
         this.subGearSlot1.setGear(this.gearNode, this.subGearSlot1.getSlotPosition());
         this.subGearSlot2.setGear(this.gearNode, this.subGearSlot2.getSlotPosition());
@@ -43,14 +48,9 @@ public abstract class Gear {
 
     abstract protected void setGearType();
 
-    protected JsonNode getGearNode() {
-        return this.gearNode;
-    };
-
     // NOTE: Weaponクラスから参照
     // 似たような形なのでいつかまとめたい
     protected void readGearInfo() {
-        // 初期化しないとreturn出来ない
         ObjectMapper mapper = new ObjectMapper();
         try {
             JsonNode node = mapper.readTree(new File(
@@ -65,15 +65,47 @@ public abstract class Gear {
         }
     }
 
-    public void display() {
-        System.out.printf("名前 : %s\nメインギア : %s\nサブギア1 : %s\nサブギア2 : %s\nサブギア3 : %s\n",
-                this.gearName,
-                this.getMainGearSlot(),
-                this.getSubGearSlot1(),
-                this.getSubGearSlot2(),
-                this.getSubGearSlot3());
+    public static void sumGearPower(Gear head, Gear clothiong, Gear choe) {
+
+        Gear[] gearPower = { head, clothiong, choe };
+        String[] mainGear = new String[3];
+        String[] subGear = new String[9];
+        Map<String, Float> sumGearPower = new HashMap<String, Float>();
+
+        // メインギアとサブギアをリストにしてまとめる。
+        for (int i = 0; i <= 2; i++) {
+            mainGear[i] = gearPower[i].getMainGearPower();
+            subGear[0 + i * 3] = gearPower[i].getSubGearPower1();
+            subGear[1 + i * 3] = gearPower[i].getSubGearPower2();
+            subGear[2 + i * 3] = gearPower[i].getSubGearPower3();
+        }
+
+        sumGearPower = Gear.valueCount(sumGearPower, mainGear, 1f);
+        sumGearPower = Gear.valueCount(sumGearPower, subGear, 0.1f);
+
+        sumGearPower.forEach((k, v) -> {
+            System.out.printf("%s : %s\n", k, ((float) Math.round(v * 10)) / 10);
+        });
     }
 
+    // 値カウント
+    public static Map<String, Float> valueCount(Map<String, Float> count, String[] dict, float coefficient) {
+        for (String value : dict) {
+            if (!count.containsKey(value)) {
+                count.put(value, coefficient);
+            } else {
+                count.replace(value, count.get(value) + coefficient);
+            }
+        }
+
+        return count;
+    }
+
+    /*
+     *
+     * get
+     *
+     */
     public String getGearName() {
         return this.gearName;
     }
@@ -90,19 +122,19 @@ public abstract class Gear {
         return this.gearTypeName.get(this.gearType);
     }
 
-    public String getMainGearSlot() {
+    public String getMainGearPower() {
         return this.mainGearSlot.getGearPower();
     }
 
-    public String getSubGearSlot1() {
+    public String getSubGearPower1() {
         return this.subGearSlot1.getGearPower();
     }
 
-    public String getSubGearSlot2() {
+    public String getSubGearPower2() {
         return this.subGearSlot2.getGearPower();
     }
 
-    public String getSubGearSlot3() {
+    public String getSubGearPower3() {
         return this.subGearSlot3.getGearPower();
     }
 }

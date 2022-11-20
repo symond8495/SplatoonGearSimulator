@@ -7,17 +7,17 @@ import weapon.*;
 public class Squid {
     private static Squid squid;
 
-    String name;
-    int hp;
-    int squidSpeed;
-    int runSpeed;
-    int inkVolume;
+    private String name;
+    private int hp;
+    private int squidSpeed;
+    private int runSpeed;
+    private int inkVolume;
 
-    Gear head;
-    Gear clothiong;
-    Gear shoe;
+    private Gear head;
+    private Gear clothiong;
+    private Gear shoe;
 
-    Weapon weapon;
+    private Weapon weapon;
 
     private Squid(String name) {
         this.name = name;
@@ -27,6 +27,7 @@ public class Squid {
         this.inkVolume = 100;
 
         squid = null;
+
     }
 
     // Squidを取得する唯一の方法
@@ -51,13 +52,9 @@ public class Squid {
     }
 
     public void setGear(String headName, String clothiongName, String shoeName) {
-        head = new Head(headName);
-        clothiong = new Clothiong(clothiongName);
-        shoe = new Shoe(shoeName);
-
-        head.display();
-        clothiong.display();
-        shoe.display();
+        this.head = new Head(headName);
+        this.clothiong = new Clothiong(clothiongName);
+        this.shoe = new Shoe(shoeName);
     }
 
     public void display() {
@@ -67,6 +64,11 @@ public class Squid {
         this.gearDisplay(this.head);
         this.gearDisplay(this.clothiong);
         this.gearDisplay(this.shoe);
+
+        System.out.println("【ギアパワー合計】");
+        Gear.sumGearPower(this.head, this.clothiong, this.shoe);
+        System.out.println();
+
         System.out.printf(
                 "【ブキ】\nブキ : %s\nボム : %s\n射程 : %s\nブキ重量 : %s\n",
                 this.weapon.getMainWeaponName(),
@@ -79,9 +81,13 @@ public class Squid {
         System.out.printf("%s : %s\nメインギア : %s\nサブギア : [%s, %s, %s]\n\n",
                 gear.getGearType(),
                 gear.getGearName(),
-                gear.getMainGearSlot(),
-                gear.getSubGearSlot1(),
-                gear.getSubGearSlot2(),
-                gear.getSubGearSlot3());
+                gear.getMainGearPower(),
+                gear.getSubGearPower1(),
+                gear.getSubGearPower2(),
+                gear.getSubGearPower3());
+    }
+
+    public void hoge() {
+        Gear.sumGearPower(this.head, this.clothiong, this.shoe);
     }
 }

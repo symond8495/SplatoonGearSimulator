@@ -9,5 +9,6 @@ public class Main {
                 "01STER コハク");
         symond.setWeapon("パブロ", "フデ");
         symond.display();
+        // symond.hoge();
     }
 }
